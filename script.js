@@ -1,4 +1,5 @@
-const display = document.querySelector('.display');
+const currentDisplay = document.querySelector('.current-display');
+const previousDisplay = document.querySelector('.previous-display');
 const number = document.querySelectorAll('.number');
 const operator = document.querySelectorAll('.operator');
 const equal = document.querySelector('#equal');
@@ -22,13 +23,13 @@ function divide(a,b) {
     return a/b;
 };
 
-let first;
-let sign;
-let second;
-let result;
+let firstNumber = '';
+let secondNumber = '';
+let firstOperator = '';
 
-function operate(a,b,c) {
-    switch (c) {
+
+function operate(operator,a,b) {
+    switch (operator) {
         case '+':
             return add(a,b);
             break;
@@ -44,35 +45,15 @@ function operate(a,b,c) {
     }
 };
 
-function firstDisplay(e) {
-    if(!first) {
-        first = e.target.textContent;
-    }
-    else {
-        first = first + e.target.textContent;
-    }
-     
-     display.textContent = first;
+function changeDisplay(e) {
+    firstNumber += e.target.textContent;
+    currentDisplay.textContent = firstNumber;
 };
 
 function getOperator(e) {
-    sign = e.target.textContent;
-    result = first + " " + sign;
-    display.textContent = result;
-    number.forEach(number => number.removeEventListener('click',firstDisplay));
-    number.forEach(number => number.addEventListener('click',secondDisplay));
-    
-
-};
-
-function secondDisplay(e) {
-    if(!second) {
-        second = e.target.textContent
-    }
-    else {
-        second = second + e.target.textContent;
-    }
-    display.textContent = result + " " + second;
+    firstOperator = e.target.textContent;
+    previousDisplay.textContent = `${firstNumber} ${firstOperator}`;
+    currentDisplay.textContent = 0;
 };
 
 function getResult() {
@@ -84,7 +65,7 @@ function clearResult() {
     window.location.reload();
 };
 
-number.forEach(number => number.addEventListener('click',firstDisplay));
+number.forEach(number => number.addEventListener('click',changeDisplay));
 operator.forEach(operator => operator.addEventListener('click', getOperator));
 equal.addEventListener('click', getResult);
 clear.addEventListener('click',clearResult);
