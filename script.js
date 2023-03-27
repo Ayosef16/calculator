@@ -1,5 +1,8 @@
 const display = document.querySelector('.display');
-const numbers = document.querySelector('.numbers');
+const number = document.querySelectorAll('.number');
+const operator = document.querySelectorAll('.operator');
+const equal = document.querySelector('#equal');
+const clear = document.querySelector('#clear');
 
 
 
@@ -20,8 +23,9 @@ function divide(a,b) {
 };
 
 let first;
-let operator;
+let sign;
 let second;
+let result;
 
 function operate(a,b,c) {
     switch (c) {
@@ -31,17 +35,56 @@ function operate(a,b,c) {
         case '-':
             return subtract(a,b);
             break;
-        case '*':
+        case 'x':
             return multiply(a,b);
             break;
-        case '/':
+        case '÷':
             return divide(a,b);
             break;
     }
 };
 
-function changeDisplay(e) {
-    display.textContent = e.target.textContent;
+function firstDisplay(e) {
+    if(!first) {
+        first = e.target.textContent;
+    }
+    else {
+        first = first + e.target.textContent;
+    }
+     
+     display.textContent = first;
 };
 
-numbers.addEventListener('click',changeDisplay);
+function getOperator(e) {
+    sign = e.target.textContent;
+    result = first + " " + sign;
+    display.textContent = result;
+    number.forEach(number => number.removeEventListener('click',firstDisplay));
+    number.forEach(number => number.addEventListener('click',secondDisplay));
+    
+
+};
+
+function secondDisplay(e) {
+    if(!second) {
+        second = e.target.textContent
+    }
+    else {
+        second = second + e.target.textContent;
+    }
+    display.textContent = result + " " + second;
+};
+
+function getResult() {
+    let answer = operate(first,second,sign);
+    display.textContent = answer;
+};
+
+function clearResult() {
+    window.location.reload();
+};
+
+number.forEach(number => number.addEventListener('click',firstDisplay));
+operator.forEach(operator => operator.addEventListener('click', getOperator));
+equal.addEventListener('click', getResult);
+clear.addEventListener('click',clearResult);
