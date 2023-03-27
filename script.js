@@ -1,3 +1,8 @@
+const display = document.querySelector('.display');
+const numbers = document.querySelector('.numbers');
+
+
+
 function add(a,b) {
     return a+b;
 };
@@ -14,9 +19,9 @@ function divide(a,b) {
     return a/b;
 };
 
-let first = 3;
-let operator = '+';
-let second = 5;
+let first;
+let operator;
+let second;
 
 function operate(a,b,c) {
     switch (c) {
@@ -34,3 +39,9 @@ function operate(a,b,c) {
             break;
     }
 };
+
+function changeDisplay(e) {
+    display.textContent = e.target.textContent;
+};
+
+numbers.addEventListener('click',changeDisplay);
