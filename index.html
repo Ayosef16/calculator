@@ -7,6 +7,9 @@
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -14,25 +17,40 @@
         <div class="display">
             <div class="previous-display"></div>
             <div class="current-display"></div>
+        </div>
+        <div id="first-container" class="container">
+            <button id="clear">AC</button>
+            <button id="delete">DEL</button>
         </div> 
-        <button id="clear">AC</button>
-        <button id="delete">DEL</button>
-        <button id="divide" class="operator">÷</button>
-        <button id="one" class="number">1</button>
-        <button id="two" class="number">2</button>
-        <button id="three" class="number">3</button>
-        <button id="multiply" class="operator">*</button>
-        <button id="four" class="number">4</button>
-        <button id="five" class="number">5</button>
-        <button id="six" class="number">6</button>
-        <button id="plus" class="operator">+</button>
-        <button id="seven" class="number">7</button>
-        <button id="eight" class="number">8</button>
-        <button id="nine" class="number">9</button>
-        <button id="minus" class="operator">-</button>
-        <button id="point" class="number">.</button>
-        <button id="zero" class="number">0</button> 
-        <button id="equal">=</button>
+        
+        <div id="second-container" class="container">
+            <button id="divide" class="operator">÷</button>
+            <button id="one" class="number">1</button>
+            <button id="two" class="number">2</button>
+            <button id="three" class="number">3</button>
+        </div>
+        
+        <div id="third-container" class="container">
+            <button id="multiply" class="operator">*</button>
+            <button id="four" class="number">4</button>
+            <button id="five" class="number">5</button>
+            <button id="six" class="number">6</button>
+        </div>
+        
+        <div id="fourth-container" class="container">
+            <button id="plus" class="operator">+</button>
+            <button id="seven" class="number">7</button>
+            <button id="eight" class="number">8</button>
+            <button id="nine" class="number">9</button>
+        </div>
+        
+        <div id="fifth-container" class="container">
+            <button id="minus" class="operator">-</button>
+            <button id="point" class="number">.</button>
+            <button id="zero" class="number">0</button> 
+            <button id="equal">=</button>
+        </div>
+
     </div>
 </body>
 </html>
