@@ -51,8 +51,8 @@ function operate(operator,a,b) {
 //Create a function that can append the numbers
 
 function appendNumber(number) {
-    if(number.textContent === '.' && firstNumber.toString().includes('.')) return
-    firstNumber += number.textContent;
+    if(number === '.' && firstNumber.toString().includes('.')) return
+    firstNumber += number;
 };
 
 //Make a update display function, that changes what is showing in the screen
@@ -71,7 +71,7 @@ function chooseOperator(op) {
     if (secondNumber !== '') {
         getResult();
     }
-    operator = op.textContent;
+    operator = op;
     secondNumber = firstNumber;
     firstNumber = '';
 };
@@ -112,12 +112,12 @@ function deleteNumber() {
 //Make the event listener events
 
 numberButtons.forEach(button => button.addEventListener('click', () => {
-    appendNumber(button);
+    appendNumber(button.textContent);
     updateDisplay();
 }));
 
 operatorButtons.forEach(button => button.addEventListener('click', () => {
-    chooseOperator(button);
+    chooseOperator(button.textContent);
     updateDisplay();
 }));
 
@@ -138,32 +138,30 @@ deleteButton.addEventListener('click', () => {
 
 //Keyboard Support
 
-function appendKey(e) {
-    if(e.key === '.' && firstNumber.toString().includes('.')) return
-    if((e.key >= 0 && e.key <=9) || e.key === '.') {
-        firstNumber += e.key;
+function handleKeyboardInput (e) {
+    if((e.key >=0 && e.key <=9) || e.key === '.') {
+        appendNumber(e.key);
     }
-    if(firstNumber !== '' && (e.key === '*' || e.key === '/' || e.key === '+' || e.key === '-')) {
-        if (firstNumber === '') return
-        if(secondNumber !== '') {
-            getResult();
-        }
+    if(e.key === '/' || e.key === '*' || e.key === '+' || e.key === '-') {
         if(e.key === '/') {
-            operator = '÷';
+            chooseOperator('÷');
         }
         else {
-            operator = e.key;
+            chooseOperator(e.key);
         }
-        secondNumber = firstNumber;
-        firstNumber = '';
     }
     if(e.key === 'Enter' || e.key === '=') {
         getResult();
     }
-
-};
+    if(e.key === 'Backspace' || e.key === 'Delete') {
+        deleteNumber();
+    }
+    if(e.key === 'Escape') {
+        clearResult();
+    }
+}
 
 document.addEventListener('keydown', (e) => {
-    appendKey(e);
+    handleKeyboardInput(e);
     updateDisplay();
 });
