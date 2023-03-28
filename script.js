@@ -37,7 +37,7 @@ function operate(operator,a,b) {
         case '-':
             return subtract(a,b);
             break;
-        case 'x':
+        case '*':
             return multiply(a,b);
             break;
         case '÷':
@@ -136,3 +136,34 @@ deleteButton.addEventListener('click', () => {
     updateDisplay();
 });
 
+//Keyboard Support
+
+function appendKey(e) {
+    if(e.key === '.' && firstNumber.toString().includes('.')) return
+    if((e.key >= 0 && e.key <=9) || e.key === '.') {
+        firstNumber += e.key;
+    }
+    if(firstNumber !== '' && (e.key === '*' || e.key === '/' || e.key === '+' || e.key === '-')) {
+        if (firstNumber === '') return
+        if(secondNumber !== '') {
+            getResult();
+        }
+        if(e.key === '/') {
+            operator = '÷';
+        }
+        else {
+            operator = e.key;
+        }
+        secondNumber = firstNumber;
+        firstNumber = '';
+    }
+    if(e.key === 'Enter' || e.key === '=') {
+        getResult();
+    }
+
+};
+
+document.addEventListener('keydown', (e) => {
+    appendKey(e);
+    updateDisplay();
+});
